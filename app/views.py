@@ -61,3 +61,17 @@ def saveuser(request):
 			return redirect('/index/')
 	else:
 		return HttpResponse('Error')
+
+@csrf_exempt
+def verify_account(request):
+	if request.method=='POST':
+		id_ = request.POST.get('id')
+		otp = request.POST.get('otp')
+		session_otp = request.session['otp']
+		if otp == session_otp:
+			UserData.objects.filter(User_ID=id_).update(Status='Active')
+			request.session['userid'] = id_
+			return redirect('/index/')
+		else:
+			dic = {'id':id_}
+			return render(request,'verify.html',dic)
