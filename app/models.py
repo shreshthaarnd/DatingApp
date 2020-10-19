@@ -10,6 +10,7 @@ class UserData(models.Model):
 	User_Gender=models.CharField(max_length=10)
 	User_Age=models.CharField(max_length=5)
 	User_City=models.CharField(max_length=50)
+	User_Password=models.CharField(max_length=20, default='Not Set')
 	Status=models.CharField(max_length=10, default='Deactive')
 	class Meta:
 		db_table="UserData"

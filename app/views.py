@@ -41,10 +41,6 @@ def saveuser(request):
 				x=x+1
 				uid=u+str(x)
 			x=int(x)
-			otp=uuid.uuid5(uuid.NAMESPACE_DNS, str(datetime.datetime.today())+uid+name+email+mobile+age+gender+city).int
-			otp=str(otp)
-			otp=otp.upper()[0:6]
-			request.session['otp'] = otp
 			UserData(
 				User_ID = uid,
 				User_Name = name,
@@ -54,24 +50,11 @@ def saveuser(request):
 				User_Age = age,
 				User_City = city
 				).save()
-			sendotp(otp, email)
-			return redirect('/index/')
+			sendconfirmation(email)
+			dic = {'msg':'<h4 style="color:green;"><i class="fa fa-check"></i> We will contact you soon!</h4>'}
+			return render(request,'index.html',dic)
 		else:
 			dic = {'msg':'<h4 style="color:red;"><i class="fa fa-exclamation-triangle"></i> Account Already Exists!</h4>'}
-			return redirect('/index/')
+			return render(request,'index.html',dic)
 	else:
 		return HttpResponse('Error')
-
-@csrf_exempt
-def verify_account(request):
-	if request.method=='POST':
-		id_ = request.POST.get('id')
-		otp = request.POST.get('otp')
-		session_otp = request.session['otp']
-		if otp == session_otp:
-			UserData.objects.filter(User_ID=id_).update(Status='Active')
-			request.session['userid'] = id_
-			return redirect('/index/')
-		else:
-			dic = {'id':id_}
-			return render(request,'verify.html',dic)

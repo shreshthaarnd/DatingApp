@@ -13,5 +13,4 @@ urlpatterns = [
     path('single-room/', single_rooms),
     path('saveuser/', saveuser),
     path('verify/', verify),
-    path('verify_account/', verify_account),
 ]
