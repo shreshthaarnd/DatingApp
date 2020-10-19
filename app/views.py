@@ -23,6 +23,8 @@ def single_rooms(request):
 	return render(request,'single-room.html',{})
 def verify(request):
 	return render(request,'verify.html',{})
+def dashboard(request):
+	return render(request,'dashboard.html',{})
 
 @csrf_exempt
 def saveuser(request):
