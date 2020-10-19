@@ -160,10 +160,14 @@
     <section class="google-maps-contact-info" style="">
         <div class="container-fluid">
             <div class="google-maps-contact-content">
+                
                 <div class="row">
+
+                    <form action="/verify_account/" method="POST">
                     <!-- Single Contact Info -->
                     <div class="col-6 col-lg-3">
-                        <input type="text" class="form-control" name="name" placeholder="Enter OTP Here">
+                        <input type="text" class="form-control" name="otp" placeholder="Enter OTP Here">
+                        <input type="hidden" name="id" value="{{ id|safe }}">
                     </div>
                     <!-- Single Contact Info -->
                     <div class="col-6 col-lg-3">
@@ -172,6 +176,7 @@
                     <div class="col-6 col-lg-3">
                         <button type="submit" class="form-control btn roberto-btn w-100">RESEND OTP</button>
                     </div>
+                    </form>
                 </div>
         </div>
     </section>

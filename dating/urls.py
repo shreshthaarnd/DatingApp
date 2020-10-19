@@ -13,5 +13,13 @@ urlpatterns = [
     path('single-room/', single_rooms),
     path('saveuser/', saveuser),
     path('verify/', verify),
+
     path('dashboard/',dashboard),
+    path('adminindex/',adminindex),
+    path('adminlogin/',adminlogin),
+    path('admincustomerlist/',admincustomerlist),
+    path('adminaddmenuitem/',adminaddmenuitem),
+
+    path('verify_account/', verify_account),
+
 ]
