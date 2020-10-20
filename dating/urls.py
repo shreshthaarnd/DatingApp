@@ -19,6 +19,7 @@ urlpatterns = [
     path('adminlogin/',adminlogin),
     path('admincustomerlist/',admincustomerlist),
     path('adminaddmenuitem/',adminaddmenuitem),
+    path('changepassword/',changepassword),
 
     path('verify_account/', verify_account),
 
