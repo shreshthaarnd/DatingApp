@@ -87,3 +87,5 @@ def adminaddmenuitem(request):
 	return render(request,'adminpannel/addmenuitem.html',{})
 def changepassword(request):
 	return render(request,'changepassword.html',{})
+def login(request):
+	return render(request,'login.html',{})

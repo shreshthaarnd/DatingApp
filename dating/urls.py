@@ -20,6 +20,7 @@ urlpatterns = [
     path('admincustomerlist/',admincustomerlist),
     path('adminaddmenuitem/',adminaddmenuitem),
     path('changepassword/',changepassword),
+    path('login/',login),
 
     path('verify_account/', verify_account),
 
