@@ -127,7 +127,6 @@
                                             <th>Age</th>
                                             <th>City</th>
                                             <th>Password</th>
-                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -142,8 +141,11 @@
                                           <td>{{ x.User_Age|safe }}</td>
                                           <td>{{ x.User_City|safe }}</td> 
                                           <td>{{ x.User_Password|safe }}</td>
-                                          <td>{{ x.Status|safe }}</td>
-                                          <td><a href="" class="btn btn-success">Approve</a></td>
+                                          {% if x.Status == 'Deactive' %}
+                                          <td><a href="/adminapproveuser/?uid={{ x.User_ID|safe }}" class="btn btn-success">Approve</a></td>
+                                          {% else %}
+                                          <td><a href="/adminapproveuser/?uid={{ x.User_ID|safe }}" class="btn btn-danger">Deactivate Account</a></td>
+                                          {% endif %}
                                         </tr>
                                         {% endfor %}
                                     </tbody>

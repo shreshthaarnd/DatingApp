@@ -43,6 +43,9 @@ def saveuser(request):
 				x=x+1
 				uid=u+str(x)
 			x=int(x)
+			password=uuid.uuid5(uuid.NAMESPACE_DNS, uid+name+email+mobile+gender+age+city)
+			password=str(password)
+			password=password.upper()[0:8]
 			UserData(
 				User_ID = uid,
 				User_Name = name,
@@ -50,7 +53,8 @@ def saveuser(request):
 				User_Mobile = mobile,
 				User_Gender = gender,
 				User_Age = age,
-				User_City = city
+				User_City = city,
+				User_Password=password,
 				).save()
 			sendconfirmation(email)
 			dic = {'msg':'<h4 style="color:green;"><i class="fa fa-check"></i> We will contact you soon!</h4>'}
@@ -89,3 +93,16 @@ def adminuserlist(request):
 		return render(request,'adminpannel/userlist.html',dic)
 	except:
 		return HttpResponse('404 Not Found')
+
+def adminapproveuser(request):
+	try:
+		uid = request.GET.get('uid')
+		obj = UserData.objects.filter(User_ID=uid)
+		obj.update(Status='Active')
+		sendpassword(obj[0].User_Email,obj[0].User_Password)
+		return redirect('/adminuserlist/')
+	except:
+		return HttpResponse('404 Not Found')
+
+def changepassword(request):
+	return render(request,'changepassword.html',{})
