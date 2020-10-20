@@ -23,6 +23,8 @@ def single_rooms(request):
 	return render(request,'single-room.html',{})
 def verify(request):
 	return render(request,'verify.html',{})
+def dashboard(request):
+	return render(request,'dashboard.html',{})
 
 @csrf_exempt
 def saveuser(request):
@@ -58,3 +60,32 @@ def saveuser(request):
 			return render(request,'index.html',dic)
 	else:
 		return HttpResponse('Error')
+
+def adminindex(request):
+	return render(request,'adminpannel/index.html',{})
+def adminlogin(request):
+	return render(request,'adminpannel/login.html',{})
+def admincustomerlist(request):
+	return render(request,'adminpannel/customerlist.html',{})
+def adminaddmenuitem(request):
+	return render(request,'adminpannel/addmenuitem.html',{})
+
+@csrf_exempt
+def adminlogincheck(request):
+	if request.method == 'POST':
+		email = request.POST.get('email')
+		password = request.POST.get('password')
+		if email == 'admin@dating.com' and password == '1234':
+			request.session['admin'] = email
+			return redirect('/adminindex/')
+		else:
+			dic = {'msg':'Incorrect Credentials'}
+			return render(request,'adminpannel/login.html',dic)
+
+def adminuserlist(request):
+	try:
+		aid = request.session['admin']
+		dic = {'data':UserData.objects.all()}
+		return render(request,'adminpannel/userlist.html',dic)
+	except:
+		return HttpResponse('404 Not Found')
