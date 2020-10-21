@@ -106,3 +106,5 @@ def adminapproveuser(request):
 
 def changepassword(request):
 	return render(request,'changepassword.html',{})
+def login(request):
+	return render(request,'login.html',{})

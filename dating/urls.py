@@ -22,4 +22,6 @@ urlpatterns = [
     path('adminuserlist/',adminuserlist),
     path('changepassword/',changepassword),
     path('adminapproveuser/',adminapproveuser),
+    path('login/',login),
+
 ]
