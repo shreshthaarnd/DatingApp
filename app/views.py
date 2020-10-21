@@ -89,3 +89,7 @@ def changepassword(request):
 	return render(request,'changepassword.html',{})
 def login(request):
 	return render(request,'login.html',{})
+def wall(request):
+	return render(request,'wall.html',{})
+def changeprofilepic(request):
+	return render(request,'changeprofilepic.html',{})

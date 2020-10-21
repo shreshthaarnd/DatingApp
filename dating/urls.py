@@ -21,6 +21,7 @@ urlpatterns = [
     path('adminaddmenuitem/',adminaddmenuitem),
     path('changepassword/',changepassword),
     path('login/',login),
+    path('wall/',wall),
 
     path('verify_account/', verify_account),
 
