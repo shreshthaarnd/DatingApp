@@ -31,6 +31,7 @@ urlpatterns = [
     path('saveprofilepicture/',saveprofilepicture),
     path('logout/',logout),
     path('saveedit/',saveedit),
+    path('editinfo/',editinfo),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

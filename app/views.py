@@ -195,3 +195,5 @@ def saveedit(request):
 		return redirect('/dashboard/')
 	else:
 		return HttpResponse('404 Not Found')
+def editinfo(request):
+	return render(request,'editinfo.html',{})
