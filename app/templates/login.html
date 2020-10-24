@@ -166,21 +166,23 @@
                     <!-- Section Heading -->
                     <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
                         <h2>Login Here</h2>
+                        {{ msg|safe }}
                     </div>
                 </div>
             </div>
 
             <div class="row">
+
                 <div class="col-12">
                     <!-- Form -->
                     <div class="roberto-contact-form">
-                        <form action="#" method="post">
+                        <form action="/checklogin/" method="POST">
                             <div class="row">
                                 <div class="col-12 col-lg-6 wow fadeInUp" data-wow-delay="100ms">
-                                    <input type="email" name="message-name" class="form-control mb-30" placeholder="Your Email">
+                                    <input type="email" name="email" class="form-control mb-30" placeholder="Your Email">
                                 </div>
                                 <div class="col-12 col-lg-6 wow fadeInUp" data-wow-delay="100ms">
-                                    <input type="password" name="message-email" class="form-control mb-30" placeholder="Your Password">
+                                    <input type="password" name="password" class="form-control mb-30" placeholder="Your Password">
                                 </div>
                                 <div class="col-12 text-center wow fadeInUp" data-wow-delay="100ms">
                                     <button type="submit" class="btn roberto-btn mt-15">Login</button>

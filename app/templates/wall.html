@@ -16,6 +16,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'w3.css' %}">
 
 </head>
 
@@ -91,16 +92,22 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul id="nav">
-                                    <li class="active"><a href="/index/">Home</a></li>
-                                    <li><a href="/wall/">Profiles</a></li>
+                                    <li><a href="/index/">Home</a></li>
+                                    <li class="active"><a href="/wall/">Profiles</a></li>
                                     <li><a href="/about/">About Us</a></li>
                                     <li><a href="/contact/">Contact</a></li>
                                 </ul>
+
+                                <!-- Book Now -->
+                                {% if checksession == True %}
                                 <div class="book-now-btn ml-3 ml-lg-5">
                                     <a href="/dashboard/">My Account <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                 </div>
-
-                                
+                                {% else %}
+                                <div class="book-now-btn ml-3 ml-lg-5">
+                                    <a href="/login/">Login <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                </div>
+                                {% endif %}
                             </div>
                             <!-- Nav End -->
                         </div>
@@ -112,15 +119,15 @@
     <!-- Header Area End -->
 
     <!-- Breadcrumb Area Start -->
-    <div class="breadcrumb-area contact-breadcrumb bg-img bg-overlay jarallax" style="background-image: url({% static 'img/bg-img/18.jpg' %});">
-        <div class="container">
-            <div class="row">
+    <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url({% static 'img/bg-img/16.jpg' %});">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
                 <div class="col-12">
-                    <div class="breadcrumb-content text-center mt-100">
-                        <h2 class="page-title">Change Password</h2>
+                    <div class="breadcrumb-content text-center">
+                        <h2 class="page-title">People You May Like</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                
+                                <li class="breadcrumb-item"><a href="/index/">Home</a></li>
                             </ol>
                         </nav>
                     </div>
@@ -130,38 +137,60 @@
     </div>
     <!-- Breadcrumb Area End -->
 
-    <!-- Google Maps & Contact Info Area Start -->
-    <section class="roberto-about-area section-padding-100-0">
-        <!-- Hotel Search Form Area -->
-        <div class="hotel-search-form-area">
-            <div class="container-fluid">
-                <div class="hotel-search-form">
-                    <form action="/savepassword/" method="POST">
-                        {{ msg|safe }}
-                        {% if flag == False %}
-                        <div class="row justify-content-between align-items-end">
-                            <div class="col-6 col-md-2 col-lg-3">
-                                <input type="password" class="form-control" name="old" placeholder="Old Password">
-                            </div>
-                            <div class="col-6 col-md-2 col-lg-3">
-                                <input type="password" class="form-control" name="new" placeholder="New Password">
-                            </div>
-                            
-                            <div class="col-12 col-md-3">
-                                <button type="submit" class="form-control btn roberto-btn w-100">Save Password</button>
-                            </div>
+    <!-- Rooms Area Start -->
+    <div class="roberto-rooms-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    {% for x in users %}
+                    {% if not x.User_ID == userid %}
+                    <!-- Single Room Area -->
+                    <div style="width:100%;"class="single-room-area d-flex align-items-center mb-50 wow fadeInUp" data-wow-delay="100ms">
+                        <!-- Room Thumbnail -->
+                        <div class="room-thumbnail">
+                            <img style="width:300px;height:300px;border-radius:200px;"src="{% for y in picture %}{% if x.User_ID == y.User_ID %}{{ y.User_Pic.url|safe }}{% endif %}{% endfor %}" alt="">
                         </div>
-                        {% endif %}
-                    </form>
+                        <!-- Room Content -->
+                        <div class="room-content">
+                            <h2><i class="fa fa-user"></i> {{ x.User_Name|safe }}</h2>
+                            <div class="room-feature">
+                                <h6>Age: <span>{{ x.User_Age|safe }} Year</span></h6>
+                                <h6>Gender: <span>{{ x.User_Gender|safe }}</span></h6>
+                                <h6>City: <span>{{ x.User_City|safe }}</span></h6>
+                            </div>
+                            {% if checksession == True %}
+                            <a style="border-radius:50px;"href="#" class="w3-button w3-green w3-hover-white"><i class="fa fa-whatsapp"></i> Send Whatsapp Message</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+
+                    <!-- Single Room Area -->
+                    
+                    <!-- Single Room Area -->
+                    
+                    <!-- Pagination -->
+                    <nav class="roberto-pagination wow fadeInUp mb-100" data-wow-delay="1000ms">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next <i class="fa fa-angle-right"></i></a></li>
+                        </ul>
+                    </nav>
                 </div>
+
+                
             </div>
         </div>
+    </div>
+    <!-- Rooms Area End -->
 
-        
-    </section>
-
+    <!-- Call To Action Area Start -->
+    
     <!-- Footer Area Start -->
-    <footer class="footer-area section-padding-80-0" style="margin-top:50px;">
+    <footer class="footer-area section-padding-80-0">
         <!-- Main Footer Area -->
         <div class="main-footer-area">
             <div class="container">

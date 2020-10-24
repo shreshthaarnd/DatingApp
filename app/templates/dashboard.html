@@ -21,6 +21,7 @@
 </head>
 
 <body>
+    
     <!-- Preloader -->
     <div id="preloader">
         <div class="loader"></div>
@@ -92,49 +93,15 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul id="nav">
-                                    <li class="active"><a href="./index.html">Home</a></li>
-                                    <li><a href="./room.html">Rooms</a></li>
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="dropdown">
-                                            <li class="active"><a href="/index/">Home</a></li>
-                                    <li><a href="/room.html/">Rooms</a></li>
+                                    <li class="active"><a href="/index/">Home</a></li>
+                                    <li><a href="/wall/">Profiles</a></li>
                                     <li><a href="/about/">About Us</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="/index/">- Home</a></li>
-                                            <li><a href="/room/">- Rooms</a></li>
-                                            <li><a href="/single-room/">- Single Rooms</a></li>
-                                            <li><a href="/about/">- About Us</a></li>
-                                            <li><a href="/blog/">- Blog</a></li>
-                                            <li><a href="/single-blog/">- Single Blog</a></li>
-                                            <li><a href="/contact/">- Contact</a></li>
-                                            <li><a href="#">- Dropdown</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="#">- Dropdown Item</a></li>
-                                                    <li><a href="#">- Dropdown Item</a></li>
-                                                    <li><a href="#">- Dropdown Item</a></li>
-                                                    <li><a href="#">- Dropdown Item</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="/blog/">News</a></li>
                                     <li><a href="/contact/">Contact</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="./blog.html">News</a></li>
-                                    <li><a href="./contact.html">Contact</a></li>
                                 </ul>
-
-                                <!-- Search -->
-                                <div class="search-btn ml-4">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </div>
 
                                 <!-- Book Now -->
                                 <div class="book-now-btn ml-3 ml-lg-5">
-                                    <a href="#">Book Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                    <a href="/logout/">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                             <!-- Nav End -->
@@ -152,7 +119,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Hi,</h2>
+                        <h2 class="page-title">Hi, {{ data.User_Name|safe }}</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
                                 <li class="breadcrumb-item"><a href="index.html">Welcome</a></li>
@@ -172,25 +139,57 @@
             <div class="row align-items-center">
                 <div class="col-12 col-lg-6">
                     <div class="about-thumbnail pr-lg-5 mb-100 wow fadeInUp" data-wow-delay="100ms">
-                        <img src="{% static 'img/bg-img/19.jpg' %}" alt="">
+                        <img style="border-radius:200px;height:400px;width:400px;"src="{{ picture.User_Pic.url|safe }}" alt="">
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <!-- Section Heading -->
                     <div class="section-heading wow fadeInUp" data-wow-delay="300ms">
                         <h6>My Profile</h6>
-                        <h2>Sonali Winget</h2>
+                        <form action="/saveedit/" method="POST" id="edit">
+                        <input type="text" value="{{ data.User_Name|safe }}" style="background-color:transparent;border:none;font-size:35px;font-weight:bold;" name="name" id="name" onchange="document.getElementById('edit').submit();" disabled>
+                        <button style="border:none;background-color:transparent;font-size:20px;" onclick="document.getElementById('name').disabled=false;"><i class="fa fa-pencil"></i></button>
+                        
                         <hr style="border-width:18px;border-color:red;border-radius:50px;">
                     </div>
                     <div class="about-content mb-100 wow fadeInUp" data-wow-delay="500ms">
                         <div class="w3-card-4" style="padding:20px;">
-                            <form style="font-size:20px;width:100%;">
-                                <i style="color:red;"class="fa fa-envelope"></i>
-                                <input style="background-color:transparent;border:none;font-size:20px;"type="email" value="sonali2@gmail.com">
-                                <button style="background-color:transparent;border:none;"><i class="fa fa-pencil"></i></button><br>
-                                <i style="color:red;"class="fa fa-phone"></i>
-                                <input style="background-color:transparent;border:none;font-size:20px;"type="number" value="6789678876">
-                                <button style="background-color:transparent;border:none;"><i class="fa fa-pencil"></i></button>
+                            <table style="width:100%;font-size:18px;"class="w3-table-all">
+                                <tr>
+                                    <td><i class="fa fa-envelope-o"></i></td>
+                                    <td><input style="background-color:transparent;border:none;"type="email" value="{{ data.User_Email|safe }}" disabled></td>
+                                    <td><button style="border:none;background-color:transparent;" disabled></button></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-phone"></i></td>
+                                    <td><input style="background-color:transparent;border:none;"type="number" value="{{ data.User_Mobile|safe }}" name="mobile" id="mobile" disabled></td>
+                                    <td><button style="border:none;background-color:transparent;" onclick="document.getElementById('mobile').disabled=false;"><i class="fa fa-pencil"></i></button></td>
+                                </tr>
+                                <tr>
+                                    {% if data.User_Gender == 'Female' %}
+                                    <td><i class="fa fa-female"></i></td>
+                                    {% else %}
+                                    <td><i class="fa fa-male"></i></td>
+                                    {% endif %}
+                                    <td><input style="background-color:transparent;border:none;"type="text" value="{{ data.User_Gender|safe }}" disabled></td>
+                                    <td><button style="border:none;background-color:transparent;" disabled></button></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-calendar-check-o"></i></td>
+                                    <td><input style="background-color:transparent;border:none;width:40px;text-align:right;"type="number" value="{{ data.User_Age|safe }}" name="age" id="age" disabled> Years Old</td>
+                                    <td><button style="border:none;background-color:transparent;" onclick="document.getElementById('age').disabled=false;"><i class="fa fa-pencil"></i></button></td>
+                                </tr>
+
+                            </table>
+                            </form>
+                            <form action="/saveprofilepicture/" method="POST" enctype="multipart/form-data" id="picform">
+                            <div style="text-align:center;padding-top:20px;"class="w3-bar">
+                                <a style="border-radius:50px;"class="w3-button  w3-red w3-hover-black"href="/changepassword/"><i class="fa fa-lock"></i> Change Password</a>
+                                
+                                <input style="display:none;"type="file" name="picture" id="file" onchange="document.getElementById('picform').submit();">
+                                <label for="file"style="border-radius:50px;"class="w3-button w3-red w3-hover-black"><i class="fa fa-camera"></i> Change Picture</label>
+                                
+                            </div>
                             </form>
                         </div>
                     </div>
@@ -201,112 +200,10 @@
     <!-- About Us Area End -->
 
     <!-- Video Area Start -->
-    <div class="roberto--video--area bg-img bg-overlay jarallax section-padding-0-100" style="background-image: url({% static 'img/bg-img/20.jpg' %});">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center justify-content-center">
-                <div class="col-12 col-md-6">
-                    <!-- Section Heading -->
-                    <div class="section-heading text-center white wow fadeInUp" data-wow-delay="100ms">
-                        <h6>Ultimate Solutions</h6>
-                        <h2>Our Hotel &amp; Room</h2>
-                    </div>
-                    <div class="video-content-area mt-100 wow fadeInUp" data-wow-delay="500ms">
-                        <a href="https://www.youtube.com/watch?v=Ldd8yjjo6jA" class="video-play-btn"><i class="fa fa-play"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Video Area End -->
+    
 
-    <!-- Service Area Start -->
-    <section class="roberto-service-area section-padding-100-0">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Section Heading -->
-                    <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms">
-                        <h6>Ultimate Solutions</h6>
-                        <h2>Our Hotel &amp; Room</h2>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <!-- Single Service Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-service-area mb-100 wow fadeInUp" data-wow-delay="300ms">
-                        <img src="{% static 'img/bg-img/21.jpg' %}" alt="">
-                        <div class="service-title d-flex align-items-center justify-content-center">
-                            <h5>Restaurant &amp; Bar</h5>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Service Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-service-area mb-100 wow fadeInUp" data-wow-delay="500ms">
-                        <img src="{% static 'img/bg-img/22.jpg' %}" alt="">
-                        <div class="service-title d-flex align-items-center justify-content-center">
-                            <h5>Spa &amp; Fitness</h5>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Service Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-service-area mb-100 wow fadeInUp" data-wow-delay="700ms">
-                        <img src="{% static 'img/bg-img/23.jpg' %}" alt="">
-                        <div class="service-title d-flex align-items-center justify-content-center">
-                            <h5>Pool &amp; Party</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Service Area End -->
-
-    <!-- Call To Action Area Start -->
-    <section class="roberto-cta-area">
-        <div class="container">
-            <div class="cta-content bg-img bg-overlay jarallax" style="background-image: url({% static 'img/bg-img/1.jpg' %});">
-                <div class="row align-items-center">
-                    <div class="col-12 col-md-7">
-                        <div class="cta-text mb-50">
-                            <h2>Contact us now!</h2>
-                            <h6>Contact (+12) 345-678-9999 to book directly or for advice</h6>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-5 text-right">
-                        <a href="#" class="btn roberto-btn mb-50">Contact Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Call To Action Area End -->
-
-    <!-- Partner Area Start -->
-    <div class="partner-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="partner-logo-content d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="300ms">
-                        <!-- Single Partner Logo -->
-                        <a href="#" class="partner-logo"><img src="{% static 'img/core-img/p1.png' %}" alt=""></a>
-                        <!-- Single Partner Logo -->
-                        <a href="#" class="partner-logo"><img src="{% static 'img/core-img/p2.png' %}" alt=""></a>
-                        <!-- Single Partner Logo -->
-                        <a href="#" class="partner-logo"><img src="{% static 'img/core-img/p3.png' %}" alt=""></a>
-                        <!-- Single Partner Logo -->
-                        <a href="#" class="partner-logo"><img src="{% static 'img/core-img/p4.png' %}" alt=""></a>
-                        <!-- Single Partner Logo -->
-                        <a href="#" class="partner-logo"><img src="{% static 'img/core-img/p5.png' %}" alt=""></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Partner Area End -->
+    
+    
 
     <!-- Footer Area Start -->
     <footer class="footer-area section-padding-80-0">

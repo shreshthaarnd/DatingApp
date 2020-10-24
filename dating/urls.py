@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 from app.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,5 +25,15 @@ urlpatterns = [
     path('changepassword/',changepassword),
     path('adminapproveuser/',adminapproveuser),
     path('login/',login),
+    path('wall/',wall),
+    path('checklogin/',checklogin),
+    path('savepassword/',savepassword),
+    path('saveprofilepicture/',saveprofilepicture),
+    path('logout/',logout),
+    path('saveedit/',saveedit),
 
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)

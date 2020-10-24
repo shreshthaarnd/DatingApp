@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 class UserData(models.Model):
@@ -11,6 +12,13 @@ class UserData(models.Model):
 	User_Age=models.CharField(max_length=5)
 	User_City=models.CharField(max_length=50)
 	User_Password=models.CharField(max_length=20, default='Not Set')
+	User_Pic=models.FileField(upload_to='profilepictures/', default='download.png')
 	Status=models.CharField(max_length=10, default='Deactive')
 	class Meta:
 		db_table="UserData"
+
+class UserPictureData(models.Model):
+	User_ID=models.CharField(max_length=50)
+	User_Pic=models.FileField(upload_to='profilepictures/', default='download.png')
+	class Meta:
+		db_table="UserPictureData"

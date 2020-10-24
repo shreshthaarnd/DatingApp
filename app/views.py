@@ -6,9 +6,11 @@ import uuid
 import datetime
 from app.models import *
 from app.mailutil import *
+from app.myutil import *
 # Create your views here.
 def index(request):
-	return render(request,'index.html',{})
+	dic = {'checksession':checksession(request)}
+	return render(request,'index.html',dic)
 def about(request):
 	return render(request,'about.html',{})
 def blog(request):
@@ -24,7 +26,9 @@ def single_rooms(request):
 def verify(request):
 	return render(request,'verify.html',{})
 def dashboard(request):
-	return render(request,'dashboard.html',{})
+	dic = {'data':UserData.objects.filter(User_ID=request.session['user_id'])[0],
+			'picture':UserPictureData.objects.filter(User_ID=request.session['user_id'])[0]}
+	return render(request,'dashboard.html',dic)
 
 @csrf_exempt
 def saveuser(request):
@@ -55,6 +59,9 @@ def saveuser(request):
 				User_Age = age,
 				User_City = city,
 				User_Password=password,
+				).save()
+			UserPictureData(
+				User_ID = uid
 				).save()
 			sendconfirmation(email)
 			dic = {'msg':'<h4 style="color:green;"><i class="fa fa-check"></i> We will contact you soon!</h4>'}
@@ -104,7 +111,87 @@ def adminapproveuser(request):
 	except:
 		return HttpResponse('404 Not Found')
 
+@csrf_exempt
+def checklogin(request):
+	if request.method=='POST':
+		email = request.POST.get('email')
+		password = request.POST.get('password')
+		if UserData.objects.filter(User_Email=email, User_Password=password).exists():
+			request.session['user_id'] = UserData.objects.filter(User_Email=email)[0].User_ID
+			return redirect('/index/')
+		else:
+			dic = {'msg':'<h4 style="color:red;"><i class="fa fa-exclamation-triangle"></i> Incorrect Account Credentials</h4>'}
+			return render(request,'login.html',dic)
+	else:
+		return HttpResponse('404 Not Found')
+
 def changepassword(request):
-	return render(request,'changepassword.html',{})
+	dic = {'flag':False}
+	return render(request,'changepassword.html',dic)
+@csrf_exempt
+def savepassword(request):
+	if request.method=='POST':
+		old=request.POST.get('old')
+		new=request.POST.get('new')
+		uid=request.session['user_id']
+		if UserData.objects.filter(User_ID=uid,User_Password=old).exists():
+			UserData.objects.filter(User_ID=uid).update(User_Password=new)
+			dic={'flag':True,
+			'msg':'<h4 style="color:green;"><i class="fa fa-check"></i> Password Changed Successfully!</h4>'}
+			return render(request,'changepassword.html',dic)
+		else:
+			dic = {'flag':False,'msg':'<h4 style="color:red;"><i class="fa fa-exclamation-triangle"></i> Incorrect Old Password</h4>'}
+			return render(request,'changepassword.html',dic)
+	else:
+		return HttpResponse('404 Not Found')
+
+@csrf_exempt
+def saveprofilepicture(request):
+	if request.method=='POST':
+		pic=request.FILES['picture']
+		uid=request.session['user_id']
+		UserPictureData.objects.filter(User_ID=uid).delete()
+		UserPictureData(
+			User_ID=uid,
+			User_Pic=pic,
+			).save()
+		return redirect('/dashboard/')
+	else:
+		return HttpResponse('404 Not Found')
+def logout(request):
+	del request.session['user_id']
+	return redirect('/index/')
+
 def login(request):
 	return render(request,'login.html',{})
+def wall(request):
+	try:
+		users = UserData.objects.filter(Status='Active')
+		picture = UserPictureData.objects.all()
+		dic = {'userid':request.session['user_id'],'checksession':checksession(request),'users':users,'picture':picture}
+		return render(request,'wall.html',dic)
+	except:
+		users = UserData.objects.filter(Status='Active')
+		picture = UserPictureData.objects.all()
+		dic = {'userid':'none','checksession':checksession(request),'users':users,'picture':picture}
+		return render(request,'wall.html',dic)
+	
+def changeprofilepic(request):
+	dic = {'checksession':checksession(request)}
+	return render(request,'changeprofilepic.html',{})
+
+@csrf_exempt
+def saveedit(request):
+	if request.method=='POST':
+		name=request.POST.get('name')
+		mobile=request.POST.get('mobile')
+		age=request.POST.get('age')
+		obj=UserData.objects.filter(User_ID=request.session['user_id'])
+		obj.update(
+				User_Name=name,
+				User_Mobile=mobile,
+				User_Age=age
+				)
+		return redirect('/dashboard/')
+	else:
+		return HttpResponse('404 Not Found')
