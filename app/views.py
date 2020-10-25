@@ -9,7 +9,9 @@ from app.mailutil import *
 from app.myutil import *
 # Create your views here.
 def index(request):
-	dic = {'checksession':checksession(request)}
+	dic = {'checksession':checksession(request),
+			'data':UserData.objects.filter(Status='Active'),
+			'pictures':UserPictureData.objects.all()}
 	return render(request,'index.html',dic)
 def about(request):
 	return render(request,'about.html',{})
@@ -178,7 +180,7 @@ def wall(request):
 	
 def changeprofilepic(request):
 	dic = {'checksession':checksession(request)}
-	return render(request,'changeprofilepic.html',{})
+	return render(request,'changeprofilepic.html',dic)
 
 @csrf_exempt
 def saveedit(request):
@@ -186,14 +188,18 @@ def saveedit(request):
 		name=request.POST.get('name')
 		mobile=request.POST.get('mobile')
 		age=request.POST.get('age')
+		city=request.POST.get('city')
 		obj=UserData.objects.filter(User_ID=request.session['user_id'])
 		obj.update(
 				User_Name=name,
 				User_Mobile=mobile,
-				User_Age=age
+				User_Age=age,
+				User_City=city
 				)
 		return redirect('/dashboard/')
 	else:
 		return HttpResponse('404 Not Found')
 def editinfo(request):
-	return render(request,'editinfo.html',{})
+	dic = {'checksession':checksession(request),
+			'data':UserData.objects.filter(User_ID=request.session['user_id'])[0]}
+	return render(request,'editinfo.html',dic)
