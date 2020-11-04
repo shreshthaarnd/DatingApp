@@ -116,7 +116,7 @@
                         <h2 class="page-title">Hi, {{ data.User_Name|safe }}</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="index.html">Welcome</a></li>
+                                <li class="breadcrumb-item"><a href="/index/">Welcome</a></li>
                                 
                             </ol>
                         </nav>
@@ -140,10 +140,7 @@
                     <!-- Section Heading -->
                     <div class="section-heading wow fadeInUp" data-wow-delay="300ms">
                         <h6>My Profile</h6>
-                        <form action="/saveedit/" method="POST" id="edit">
-                        <input type="text" value="{{ data.User_Name|safe }}" style="background-color:transparent;border:none;font-size:35px;font-weight:bold;" name="name" id="name" onchange="document.getElementById('edit').submit();" disabled>
-                        <button style="border:none;background-color:transparent;font-size:20px;" onclick="document.getElementById('name').disabled=false;"><i class="fa fa-pencil"></i></button>
-                        
+                        <h2>{{ data.User_Name|safe }}</h2>
                         <hr style="border-width:18px;border-color:red;border-radius:50px;">
                     </div>
                     <div class="about-content mb-100 wow fadeInUp" data-wow-delay="500ms">
@@ -157,7 +154,7 @@
                                 <tr>
                                     <td><i class="fa fa-phone"></i></td>
                                     <td><input style="background-color:transparent;border:none;"type="number" value="{{ data.User_Mobile|safe }}" name="mobile" id="mobile" disabled></td>
-                                    <td><button style="border:none;background-color:transparent;" onclick="document.getElementById('mobile').disabled=false;"><i class="fa fa-pencil"></i></button></td>
+                                    <td><a style="border:none;background-color:transparent;" href="/editinfo/"><i class="fa fa-pencil"></i></a></td>
                                 </tr>
                                 <tr>
                                     {% if data.User_Gender == 'Female' %}
@@ -171,7 +168,12 @@
                                 <tr>
                                     <td><i class="fa fa-calendar-check-o"></i></td>
                                     <td><input style="background-color:transparent;border:none;width:40px;text-align:right;"type="number" value="{{ data.User_Age|safe }}" name="age" id="age" disabled> Years Old</td>
-                                    <td><button style="border:none;background-color:transparent;" onclick="document.getElementById('age').disabled=false;"><i class="fa fa-pencil"></i></button></td>
+                                    <td><a style="border:none;background-color:transparent;" href="/editinfo/"><i class="fa fa-pencil"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-location-arrow"></i></td>
+                                    <td><input style="background-color:transparent;border:none;"type="text" value="{{ data.User_City|safe }}" name="city" id="age" disabled></td>
+                                    <td><a style="border:none;background-color:transparent;" href="/editinfo/"><i class="fa fa-pencil"></i></a></td>
                                 </tr>
 
                             </table>

@@ -147,7 +147,7 @@
                                 <h6>City: <span>{{ x.User_City|safe }}</span></h6>
                             </div>
                             {% if checksession == True %}
-                            <a style="border-radius:50px;"href="#" class="w3-button w3-green w3-hover-white"><i class="fa fa-whatsapp"></i> Send Whatsapp Message</a>
+                            <a style="border-radius:50px;"href="https://api.whatsapp.com/send?phone={{ x.User_Mobile|safe }}" class="w3-button w3-green w3-hover-white"><i class="fa fa-whatsapp"></i> Send Whatsapp Message</a>
                             {% endif %}
                         </div>
                     </div>

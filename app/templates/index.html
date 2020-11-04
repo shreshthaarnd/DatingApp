@@ -269,105 +269,31 @@
             </div>
         <!-- Projects Slide -->
         <div class="projects-slides owl-carousel">
+            {% for x in data %}
             <!-- Single Project Slide -->
-            <div class="single-project-slide active bg-img" style="background-image: url({% static 'img/bg-img/5.jpg' %});">
+            <div class="single-project-slide active bg-img" style="background-image: url({% for y in pictures %}{% if x.User_ID == y.User_ID %}{{ y.User_Pic.url|safe }}{% endif %}{% endfor %});">
                 <!-- Project Text -->
                 <div class="project-content">
                     <div class="text">
                         <h6>Recently Added</h6>
-                        <h5>Name Here</h5>
+                        <h5>{{ x.User_Name|safe }}</h5>
                     </div>
                 </div>
                 <!-- Hover Effects -->
                 <div class="hover-effects">
                     <div class="text">
                         <h6>Recently Added</h6>
-                        <h5>Name Here</h5>
-                        <p>20 Years Old<br>From Agra</p>
+                        <h5>{{ x.User_Name|safe }}</h5>
+                        <p>{{ x.User_Age|safe }} Years Old<br>From {{ x.User_City|safe }}</p>
                     </div>
-                    <a href="#" class="btn project-btn"><i class="fa fa-whatsapp"></i> Send Whatsapp Message</a>
+                    {% if checksession == True %}
+                    <a href="https://api.whatsapp.com/send?phone={{ x.User_Mobile|safe }}" class="btn project-btn"><i class="fa fa-whatsapp"></i> Send Whatsapp Message</a>
+                    {% endif %}
                 </div>
             </div>
+            {% endfor %}
 
-            <!-- Single Project Slide -->
-            <div class="single-project-slide bg-img" style="background-image: url({% static 'img/bg-img/6.jpg' %});">
-                <!-- Project Text -->
-                <div class="project-content">
-                    <div class="text">
-                        <h6>Recently Added</h6>
-                        <h5>Name Here</h5>
-                    </div>
-                </div>
-                <!-- Hover Effects -->
-                <div class="hover-effects">
-                    <div class="text">
-                        <h6>Recently Added</h6>
-                        <h5>Name Here</h5>
-                        <p>20 Years Old<br>From Agra</p>
-                    </div>
-                    <a href="#" class="btn project-btn"><i class="fa fa-whatsapp"></i> Send Whatsapp Message</a>
-                </div>
-            </div>
-
-            <!-- Single Project Slide -->
-            <div class="single-project-slide bg-img" style="background-image: url({% static 'img/bg-img/7.jpg' %});">
-                <!-- Project Text -->
-                <div class="project-content">
-                    <div class="text">
-                        <h6>Recently Added</h6>
-                        <h5>Name Here</h5>
-                    </div>
-                </div>
-                <!-- Hover Effects -->
-                <div class="hover-effects">
-                    <div class="text">
-                        <h6>Recently Added</h6>
-                        <h5>Name Here</h5>
-                        <p>20 Years Old<br>From Agra</p>
-                    </div>
-                    <a href="#" class="btn project-btn"><i class="fa fa-whatsapp"></i> Send Whatsapp Message</a>
-                </div>
-            </div>
-
-            <!-- Single Project Slide -->
-            <div class="single-project-slide bg-img" style="background-image: url({% static 'img/bg-img/8.jpg' %});">
-                <!-- Project Text -->
-                <div class="project-content">
-                    <div class="text">
-                        <h6>Recently Added</h6>
-                        <h5>Name Here</h5>
-                    </div>
-                </div>
-                <!-- Hover Effects -->
-                <div class="hover-effects">
-                    <div class="text">
-                        <h6>Recently Added</h6>
-                        <h5>Name Here</h5>
-                        <p>20 Years Old<br>From Agra</p>
-                    </div>
-                    <a href="#" class="btn project-btn"><i class="fa fa-whatsapp"></i> Send Whatsapp Message</a>
-                </div>
-            </div>
-
-            <!-- Single Project Slide -->
-            <div class="single-project-slide bg-img" style="background-image: url({% static 'img/bg-img/9.jpg' %});">
-                <!-- Project Text -->
-                <div class="project-content">
-                    <div class="text">
-                        <h6>Recently Added</h6>
-                        <h5>Name Here</h5>
-                    </div>
-                </div>
-                <!-- Hover Effects -->
-                <div class="hover-effects">
-                    <div class="text">
-                        <h6>Recently Added</h6>
-                        <h5>Name Here</h5>
-                        <p>20 Years Old<br>From Agra</p>
-                    </div>
-                    <a href="#" class="btn project-btn"><i class="fa fa-whatsapp"></i> Send Whatsapp Message</a>
-                </div>
-            </div>
+            
         </div>
     </section>
     <!-- Projects Area End -->
