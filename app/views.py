@@ -209,3 +209,5 @@ def adminchangekeywords(request):
 	return render(request,'adminpannel/changekeywords.html',{})
 def adminchangediscription(request):
 	return render(request,'adminpannel/changediscription.html',{})
+def adminchangeadminpassword(request):
+	return render(request,'adminpannel/changeadminpassword.html',{})

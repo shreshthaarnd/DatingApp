@@ -35,6 +35,7 @@ urlpatterns = [
     path('adminchangesitemap/',adminchangesitemap),
     path('adminchangekeywords/',adminchangekeywords),
     path('adminchangediscription/',adminchangediscription),
+    path('adminchangeadminpassword/',adminchangeadminpassword),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
