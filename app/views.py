@@ -203,3 +203,9 @@ def editinfo(request):
 	dic = {'checksession':checksession(request),
 			'data':UserData.objects.filter(User_ID=request.session['user_id'])[0]}
 	return render(request,'editinfo.html',dic)
+def adminchangesitemap(request):
+	return render(request,'adminpannel/changesitemap.html',{})
+def adminchangekeywords(request):
+	return render(request,'adminpannel/changekeywords.html',{})
+def adminchangediscription(request):
+	return render(request,'adminpannel/changediscription.html',{})

@@ -32,6 +32,9 @@ urlpatterns = [
     path('logout/',logout),
     path('saveedit/',saveedit),
     path('editinfo/',editinfo),
+    path('adminchangesitemap/',adminchangesitemap),
+    path('adminchangekeywords/',adminchangekeywords),
+    path('adminchangediscription/',adminchangediscription),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
