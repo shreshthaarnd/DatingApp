@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dating - Admin Panel</title>
+    <title>FG - Admin Dashboard</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -44,8 +44,8 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./"><img style="width:75px;border-radius:10px;"src="{% static 'img/orange logo.jpg' %}" alt="Logo" style="width:100px;"></a>
-                <a class="navbar-brand hidden" href="./"><img style="width:75pxborder-radius:10px;;"src="{% static 'img/orange logo.jpg' %}" alt="Logo"></a>
+                <a class="navbar-brand" href="./"><h2 style="margin-right:20px;font-weight:bold;">F<span style="color:red;">G</span> Admin</h2></a>
+                <a class="navbar-brand hidden" href="./"></a>
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -59,16 +59,15 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-shopping-cart"></i>SEO Settings</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-building"></i><a href="/adminuserlist/">Change Sitemap</a></li>
-                            <li><i class="fa fa-building"></i><a href="/adminuserlist/">Change Keywords</a></li>
-                            <li><i class="fa fa-building"></i><a href="/adminuserlist/">Change Description</a></li>
+                            <li><i class="fa fa-building"></i><a href="/adminchangesitemap/">Change Sitemap</a></li>
+                            <li><i class="fa fa-building"></i><a href="/adminchangekeywords/">Change Keywords</a></li>
+                            <li><i class="fa fa-building"></i><a href="/adminchangediscription/">Change Description</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-shopping-cart"></i>Settings</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-building"></i><a href="/adminuserlist/">Change Admin ID</a></li>
-                            <li><i class="fa fa-building"></i><a href="/adminuserlist/">Change Admin Password</a></li>
+                            <li><i class="fa fa-building"></i><a href="/adminchangeadminpassword/">Change Admin Password</a></li>
                         </ul>
                     </li>
                 </ul>

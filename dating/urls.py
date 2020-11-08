@@ -33,6 +33,15 @@ urlpatterns = [
     path('logout/',logout),
     path('saveedit/',saveedit),
     path('editinfo/',editinfo),
+    path('adminchangesitemap/',adminchangesitemap),
+    path('adminchangekeywords/',adminchangekeywords),
+    path('adminchangediscription/',adminchangediscription),
+    path('adminchangeadminpassword/',adminchangeadminpassword),
+    path('adminsavesitemap/',adminsavesitemap),
+    path('adminsavekeywords/',adminsavekeywords),
+    path('adminsavedescription/',adminsavedescription),
+    path('adminsaveadminpassword/',adminsaveadminpassword),
+    path('adminlogout/',adminlogout),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

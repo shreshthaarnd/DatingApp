@@ -73,46 +73,12 @@ def saveuser(request):
 			return render(request,'index.html',dic)
 	else:
 		return HttpResponse('Error')
-
-def adminindex(request):
-	return render(request,'adminpannel/index.html',{})
 def adminlogin(request):
 	return render(request,'adminpannel/login.html',{})
 def admincustomerlist(request):
 	return render(request,'adminpannel/customerlist.html',{})
 def adminaddmenuitem(request):
 	return render(request,'adminpannel/addmenuitem.html',{})
-
-@csrf_exempt
-def adminlogincheck(request):
-	if request.method == 'POST':
-		email = request.POST.get('email')
-		password = request.POST.get('password')
-		if email == 'admin@dating.com' and password == '1234':
-			request.session['admin'] = email
-			return redirect('/adminindex/')
-		else:
-			dic = {'msg':'Incorrect Credentials'}
-			return render(request,'adminpannel/login.html',dic)
-
-def adminuserlist(request):
-	try:
-		aid = request.session['admin']
-		dic = {'data':UserData.objects.all()}
-		return render(request,'adminpannel/userlist.html',dic)
-	except:
-		return HttpResponse('404 Not Found')
-
-def adminapproveuser(request):
-	try:
-		uid = request.GET.get('uid')
-		obj = UserData.objects.filter(User_ID=uid)
-		obj.update(Status='Active')
-		sendpassword(obj[0].User_Email,obj[0].User_Password)
-		return redirect('/adminuserlist/')
-	except:
-		return HttpResponse('404 Not Found')
-
 @csrf_exempt
 def checklogin(request):
 	if request.method=='POST':
@@ -203,3 +169,124 @@ def editinfo(request):
 	dic = {'checksession':checksession(request),
 			'data':UserData.objects.filter(User_ID=request.session['user_id'])[0]}
 	return render(request,'editinfo.html',dic)
+
+def adminchangesitemap(request):
+	try:
+		aid = request.session['admin']
+		dic={'sitemap':Sitemap.objects.all()[0]}
+		return render(request,'adminpannel/changesitemap.html',dic)
+	except:
+		return HttpResponse('404 Not Found')
+
+@csrf_exempt
+def adminsavesitemap(request):
+	try:
+		aid = request.session['admin']
+		if request.method=='POST':
+			sitemap=request.POST.get('sitemap')
+			Sitemap.objects.all().delete()
+			Sitemap(Sitemap=sitemap).save()
+			return redirect('/adminchangesitemap/')
+	except:
+		return HttpResponse('404 Not Found')
+
+def adminchangekeywords(request):
+	try:
+		aid = request.session['admin']
+		dic={'keywords':Keywords.objects.all()[0]}
+		return render(request,'adminpannel/changekeywords.html',dic)
+	except:
+		return HttpResponse('404 Not Found')
+
+@csrf_exempt
+def adminsavekeywords(request):
+	try:
+		aid = request.session['admin']
+		if request.method=='POST':
+			keywords=request.POST.get('keywords')
+			Keywords.objects.all().delete()
+			Keywords(Keywords=keywords).save()
+			return redirect('/adminchangekeywords/')
+	except:
+		return HttpResponse('404 Not Found')
+
+def adminchangediscription(request):
+	try:
+		aid = request.session['admin']
+		dic={'description':Description.objects.all()[0]}
+		return render(request,'adminpannel/changediscription.html',dic)
+	except:
+		return HttpResponse('404 Not Found')
+
+@csrf_exempt
+def adminsavedescription(request):
+	try:
+		aid = request.session['admin']
+		if request.method=='POST':
+			description=request.POST.get('description')
+			Description.objects.all().delete()
+			Description(Description=description).save()
+			return redirect('/adminchangediscription/')
+	except:
+		return HttpResponse('404 Not Found')
+
+def adminchangeadminpassword(request):
+	try:
+		aid = request.session['admin']
+		dic={'password':AdminData.objects.all()[0]}
+		return render(request,'adminpannel/changeadminpassword.html',dic)
+	except:
+		return HttpResponse('404 Not Found')
+
+@csrf_exempt
+def adminsaveadminpassword(request):
+	try:
+		aid = request.session['admin']
+		if request.method=='POST':
+			password=request.POST.get('newpassword')
+			AdminData.objects.all().delete()
+			AdminData(Password=password).save()
+			return redirect('/adminchangeadminpassword/')
+	except:
+		return HttpResponse('404 Not Found')
+
+@csrf_exempt
+def adminlogincheck(request):
+	if request.method == 'POST':
+		email = request.POST.get('email')
+		password = request.POST.get('password')
+		if email == 'admin@dating.com' and password == AdminData.objects.all()[0].Password:
+			request.session['admin'] = email
+			return redirect('/adminindex/')
+		else:
+			dic = {'msg':'Incorrect Credentials'}
+			return render(request,'adminpannel/login.html',dic)
+
+def adminlogout(request):
+	del request.session['admin']
+	return redirect('/adminlogin/')
+
+def adminindex(request):
+	try:
+		aid = request.session['admin']
+		return render(request,'adminpannel/index.html',{})
+	except:
+		return HttpResponse('404 Not Found')
+
+def adminuserlist(request):
+	try:
+		aid = request.session['admin']
+		dic = {'data':UserData.objects.all()}
+		return render(request,'adminpannel/userlist.html',dic)
+	except:
+		return HttpResponse('404 Not Found')
+
+def adminapproveuser(request):
+	try:
+		uid = request.GET.get('uid')
+		obj = UserData.objects.filter(User_ID=uid)
+		obj.update(Status='Active')
+		sendpassword(obj[0].User_Email,obj[0].User_Password)
+		return redirect('/adminuserlist/')
+	except:
+		return HttpResponse('404 Not Found')
