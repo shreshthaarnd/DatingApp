@@ -22,3 +22,23 @@ class UserPictureData(models.Model):
 	User_Pic=models.FileField(upload_to='profilepictures/', default='download.png')
 	class Meta:
 		db_table="UserPictureData"
+
+class Sitemap(models.Model):
+	Sitemap=models.CharField(max_length=2000)
+	class Meta:
+		db_table="Sitemap"
+
+class Keywords(models.Model):
+	Keywords=models.CharField(max_length=2000)
+	class Meta:
+		db_table="Keywords"
+
+class Description(models.Model):
+	Description=models.CharField(max_length=2000)
+	class Meta:
+		db_table="Description"
+
+class AdminData(models.Model):
+	Password=models.CharField(max_length=20)
+	class Meta:
+		db_table="AdminData"

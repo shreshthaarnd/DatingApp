@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cafe - Add Menu Category</title>
+    <title>FG - Change Description</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -118,71 +118,13 @@
             <div class="card">
                 <div class="card-header"><strong>Change Discription</strong><small> Form</small></div>
                     <div class="card-body card-block">
-                        <h3>Change Discription</h3>
-                        <label><?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://stransmit.com/</loc>
-  <lastmod>2020-11-01T19:00:08+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://stransmit.com/index/</loc>
-  <lastmod>2020-11-01T19:00:08+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://stransmit.com/pricing/</loc>
-  <lastmod>2020-11-01T19:00:08+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://stransmit.com/forgotpass/</loc>
-  <lastmod>2020-11-01T19:00:08+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://stransmit.com/downloadyoutube/</loc>
-  <lastmod>2020-11-01T19:00:08+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://stransmit.com/privacy/</loc>
-  <lastmod>2020-11-01T19:00:08+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://stransmit.com/disclaimer/</loc>
-  <lastmod>2020-11-01T19:00:08+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://stransmit.com/termcondition/</loc>
-  <lastmod>2020-11-01T19:00:08+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://stransmit.com/contact/</loc>
-  <lastmod>2020-11-01T19:00:08+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-
-
-</urlset>
-
-        </label>
+                        <h3>Change Description</h3>
+                        <label>{{ description.Description|safe }}</label>
                         <hr style="border-color:black;border-width:8px;border-radius:50px;">
-                        <form action="/adminsavemenucategory/" method="POST">
+                        <form action="/adminsavedescription/" method="POST">
                             <div class="form-group">
-                                <h3>Change Discription</h3>
-                                <textarea style="height:200px;margin-top:20px;"type="text" placeholder="Enter New Discription" name="Discription" class="form-control"></textarea>
+                                <h3>Change Description</h3>
+                                <textarea style="height:200px;margin-top:20px;"type="text" placeholder="Enter New Discription" name="description" class="form-control"></textarea>
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Update" class="btn btn-success" onclick="document.getElementById('process').style.display='block';document.getElementById('msg').style.display='none';"><br>

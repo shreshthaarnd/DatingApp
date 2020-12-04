@@ -119,7 +119,11 @@
                                 <div class="welcome-text text-center">
                                     <h6 data-animation="fadeInLeft" data-delay="200ms">Welcome to FriendshipsGoal</h6>
                                     <h2 data-animation="fadeInLeft" data-delay="500ms">Best Dating Site</h2>
-                                    <a href="#" class="btn roberto-btn btn-2" data-animation="fadeInLeft" data-delay="800ms">Register Now</a>
+                                    {% if checksession %}
+                                    <a href="/wall/" class="btn roberto-btn btn-2" data-animation="fadeInLeft" data-delay="800ms">Find Match</a>
+                                    {% else %}
+                                    <a href="#register" class="btn roberto-btn btn-2" data-animation="fadeInLeft" data-delay="800ms">Register Now</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -138,7 +142,11 @@
                                 <div class="welcome-text text-center">
                                     <h6 data-animation="fadeInUp" data-delay="200ms">Welcome to FriendshipsGoal</h6>
                                     <h2 data-animation="fadeInUp" data-delay="500ms">Find Your Quick Match</h2>
-                                    <a href="#" class="btn roberto-btn btn-2" data-animation="fadeInUp" data-delay="800ms">Register Now</a>
+                                    {% if checksession %}
+                                    <a href="/wall/" class="btn roberto-btn btn-2" data-animation="fadeInLeft" data-delay="800ms">Find Match</a>
+                                    {% else %}
+                                    <a href="#register" class="btn roberto-btn btn-2" data-animation="fadeInLeft" data-delay="800ms">Register Now</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -157,7 +165,11 @@
                                 <div class="welcome-text text-center">
                                     <h6 data-animation="fadeInDown" data-delay="200ms">Welcome to FriendshipsGoals</h6>
                                     <h2 data-animation="fadeInDown" data-delay="500ms">Choose Your Perfect Partner</h2>
-                                    <a href="#" class="btn roberto-btn btn-2" data-animation="fadeInDown" data-delay="800ms">Register Now</a>
+                                    {% if checksession %}
+                                    <a href="/wall/" class="btn roberto-btn btn-2" data-animation="fadeInLeft" data-delay="800ms">Find Match</a>
+                                    {% else %}
+                                    <a href="#register" class="btn roberto-btn btn-2" data-animation="fadeInLeft" data-delay="800ms">Register Now</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -175,7 +187,7 @@
         <div class="hotel-search-form-area">
             <div class="container-fluid">
                 <div class="hotel-search-form">
-                    <form action="/saveuser/" method="POST">
+                    <form action="/saveuser/" method="POST" id="register">
                         {{ msg|safe }}
                         <div class="row justify-content-between align-items-end">
                             <div class="col-6 col-md-2 col-lg-3">
@@ -223,7 +235,7 @@
                         <h2>Welcome to <br>Dating App</h2>
                     </div>
                     <div class="about-us-content mb-100">
-                        <h5 class="wow fadeInUp" data-wow-delay="300ms">Are you feeling Lonely? Do not worry. You have come to the right place.Register now and our agents will help you fine a quick love match. Well, we got you covered. We have 30 years of experience in match making and we can hook you up with someone around you with a matter of few hours. Just regiter on our website,explain in detail your like to our agent and our executives will do their best to find a best date for you. <span style="font-weight:bold;">Don't wait,Register Now</span>   </h5>
+                        <h5 class="wow fadeInUp" data-wow-delay="300ms">Are you feeling Lonely? Do not worry. You have come to the right place.Register now and our agents will help you fine a quick love match. Well, we got you covered. We have 30 years of experience in match making and we can hook you up with someone around you with a matter of few hours. Just regiter on our website,explain in detail your like to our agent and our executives will do their best to find a best date for you.</h5>
                         <p class="wow fadeInUp" data-wow-delay="400ms"></p>
                         <img src="img/core-img/signature.png" alt="" class="wow fadeInUp" data-wow-delay="500ms">
                     </div>
@@ -287,7 +299,7 @@
                         <p>{{ x.User_Age|safe }} Years Old<br>From {{ x.User_City|safe }}</p>
                     </div>
                     {% if checksession == True %}
-                    <a href="https://api.whatsapp.com/send?phone={{ x.User_Mobile|safe }}" class="btn project-btn"><i class="fa fa-whatsapp"></i> Send Whatsapp Message</a>
+                    <a href="https://api.whatsapp.com/send?phone=91{{ x.User_Mobile|safe }}" class="btn project-btn"><i class="fa fa-whatsapp"></i> Send Whatsapp Message</a>
                     {% endif %}
                 </div>
             </div>
@@ -352,7 +364,7 @@
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="single-footer-widget mb-80">
                             <!-- Footer Logo -->
-                            <a style="float-left;color:white;font-size:25px;"href="#" class="footer-logo">Friendships<span style="float:right;color:red;font-size:25px;">Goal</span></a>
+                            <a style="float-left;color:white;font-size:25px;"href="#" class="footer-logo">FriendshipsGoal</a>
 
                             <h4>+91-7478742337</h4>
                             <span style="font-size:20px;">friendshipgola07@gmail.com</span>
@@ -369,6 +381,7 @@
                             <h5 class="widget-title">Links</h5>
 
                             <!-- Single Blog Area -->
+                            {% if not checksession %}
                             <div class="latest-blog-area">
                                 <a href="#register" class="post-title">Create Account</a>
                             </div>
@@ -377,6 +390,7 @@
                             <div class="latest-blog-area">
                                 <a href="/login/" class="post-title">Login</a>
                             </div>
+                            {% endif %}
                             <div class="latest-blog-area">
                                 <a href="/about/" class="post-title">About Us</a>
                             </div>
